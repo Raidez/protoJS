@@ -1,7 +1,7 @@
 /**
- * @license ProtoJS v0.15.0
- * (c) 2019
- * License:
+ * @name ProtoJS
+ * @version v0.15.0
+ * @license MIT License
  */
 //------------------------------------------- GLOBAL --------------------------------------------------//
 String.prototype.format = function() {
