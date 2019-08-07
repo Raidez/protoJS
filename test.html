@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title> Todolist </title>
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css"> -->
+	<script src="proto.js"></script>
+	<script>
+		$.ready(function() {
+			var todolist = $('#todolist');
+
+			// création du bouton qui supprimera la tâche
+			var btnDel = $.create("i").text("Delete this task").class("fas fa-ban").attr("title", "Delete this task").on("click", function() {
+				$(this).parent().remove();
+			}).css("margin-left", "10px").css("color", "red");
+
+			// ajout de quelques tâches par défaut
+			var tasks = $$.create("li", 3).each(function(index) {
+				if (index == 0) {
+					$(this).text("Get food");
+				} else if (index == 1) {
+					$(this).text("Payday");
+				} else {
+					$(this).text("Gotta works");
+				}
+
+				/// ajout du bouton pour supprimer (duplication)
+				$(this).append(btnDel.clone());
+			}).appendTo(todolist);
+
+			// permet de rajouter une tâche à la liste
+			$('#addThing').handle("submit", function(evt) {
+				var task = $.serialize(this)["task"];
+				if (task.length > 0) {
+					var li = $.create("li").text(task);
+					li.append(btnDel.clone());
+					todolist.append(li);
+				}
+				$(this).find('input[type="text"]').get(0).val("");
+			});
+		});
+	</script>
+</head>
+<body>
+	<form id="addThing">
+		<input class="input" type="text" name="task" placeholder="Add thing ..." required>
+		<input class="button is-primary" type="submit">
+
+		<article>
+			<h2> Todo list : </h2>
+			<ol id="todolist"></ol>
+		</article>
+	</form>
+</body>
+</html>
